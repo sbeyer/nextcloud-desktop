@@ -188,7 +188,6 @@ else()
 endif()
 
 if(NOT WIN32 AND NOT APPLE AND LIBCLOUDPROVIDERS_FOUND)
-    message(STATUS "Building with libcloudproviderssupport")
     add_definitions(-DWITH_LIBCLOUDPROVIDERS)
     set(client_SRCS ${client_SRCS} cloudproviders/cloudprovidermanager.cpp)
     set(client_SRCS ${client_SRCS} cloudproviders/cloudproviderwrapper.cpp)

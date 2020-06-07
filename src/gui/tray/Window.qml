@@ -468,7 +468,17 @@ Window {
                         Menu {
                             id: appsMenu
                             y: (trayWindowAppsButton.y + trayWindowAppsButton.height + 2)
-                            width: (Style.headerButtonIconSize * 3)
+                            width: {
+                                var result = 0;
+                                for (var i = 0; i < count; ++i) {
+                                    var item = itemAt(i);
+                                    var width = item.contentItem.implicitWidth +
+                                                item.leftPadding + item.rightPadding;
+                                    result = Math.max(width, result);
+                                }
+
+                                return Math.min(result + 4, Style.trayWindowWidth / 2);
+                            }
                             closePolicy: "CloseOnPressOutside"
 
                             background: Rectangle {

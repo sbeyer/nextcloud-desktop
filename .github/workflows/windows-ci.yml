@@ -8,6 +8,9 @@ jobs:
     steps:
       - name: Clone and checkout commit
         uses: actions/checkout@v1
+      - name: Clang-tidy existence test
+        run: C:\msys64\mingw64\bin\clang-tidy --version
+        continue-on-error: true
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
         with:

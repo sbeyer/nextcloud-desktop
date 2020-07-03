@@ -21,9 +21,9 @@ jobs:
       - name: Download QtKeychain
         run: git clone --depth 1 -b v0.10.0 https://github.com/frankosterfeld/qtkeychain.git
       - name: Compile QtKeychain
-        run: cd qtkeychain && cmake -G "Visual Studio 16 2019" -DCMAKE_PREFIX_PATH=$Env:Qt5_DIR\lib\cmake . && cmake --build . --config Release
+        run: cd qtkeychain && cmake -G "Visual Studio 16 2019" -DCMAKE_VERBOSE_MAKEFILE=ON "-DCMAKE_EXE_LINKER_FLAGS=/verbose:lib" -DCMAKE_PREFIX_PATH=$Env:Qt5_DIR\lib\cmake . && cmake --build . --config Release
       - name: Let CMake generate build configuration
-        run: cmake -G "Visual Studio 16 2019" -DNO_SHIBBOLETH=1 -DBUILD_UPDATER=ON -DUNIT_TESTING=ON -DQTKEYCHAIN_INCLUDE_DIR=qtkeychain "-DQTKEYCHAIN_LIBRARY=qtkeychain\Release\qt5keychain.lib" .
+        run: cmake -G "Visual Studio 16 2019" -DCMAKE_VERBOSE_MAKEFILE=ON "-DCMAKE_EXE_LINKER_FLAGS=/verbose:lib"-DNO_SHIBBOLETH=1 -DBUILD_UPDATER=ON -DUNIT_TESTING=ON -DQTKEYCHAIN_INCLUDE_DIR=qtkeychain "-DQTKEYCHAIN_LIBRARY=qtkeychain\Release\qt5keychain.lib" .
       - name: Build
         run: cmake --build . --config Release -t SyncEngineTest
       - name: Run test

@@ -25,11 +25,6 @@ jobs:
       - name: Let CMake generate build configuration
         run: cmake -G "Visual Studio 16 2019" -DNO_SHIBBOLETH=1 -DBUILD_UPDATER=ON -DUNIT_TESTING=ON -DQTKEYCHAIN_INCLUDE_DIR=qtkeychain "-DQTKEYCHAIN_LIBRARY=qtkeychain\Release\qt5keychain.lib" .
       - name: Build
-        run: cmake --build . --config Release
-      - name: Run tests
-        run: ctest -C Release --output-on-failure
-        continue-on-error: true
-      - name: Run nextcloudcmd
-        run: bin\Release\nextcloudcmd
-      - name: Run nextcloud
-        run: bin\Release\nextcloud
+        run: cmake --build . --config Release -t SyncEngineTest
+      - name: Run test
+        run: bin\Release\SyncEngineTest

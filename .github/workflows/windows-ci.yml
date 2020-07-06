@@ -26,5 +26,8 @@ jobs:
         run: cmake -G "Visual Studio 16 2019" -DCMAKE_VERBOSE_MAKEFILE=ON "-DCMAKE_EXE_LINKER_FLAGS=/verbose:lib"-DNO_SHIBBOLETH=1 -DBUILD_UPDATER=ON -DUNIT_TESTING=ON -DQTKEYCHAIN_INCLUDE_DIR=qtkeychain "-DQTKEYCHAIN_LIBRARY=qtkeychain\Release\qt5keychain.lib" .
       - name: Build
         run: cmake --build . --config Release -t SyncEngineTest
+      - name: Run test help
+        run: bin\Release\SyncEngineTest --help
+        continue-on-error: true
       - name: Run test
         run: bin\Release\SyncEngineTest
